@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main</class>
+ <widget class="QDialog" name="main">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Identific.ai</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/main/main.png);</string>
+  </property>
+  <widget class="QPushButton" name="start_button">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>360</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/main/button.png);
+	border: 2px solid rgb(1, 15, 15);
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	color: rgb(81, 168, 177);
+	
+	border-radius: 15px;
+
+}
+
+QPushButton:hover{
+	
+	background-image: url(:/main/button_hover.png);
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	color: rgb(81, 168, 177);
+	border: 2px solid rgb(1, 15, 15);
+	border-radius: 15px;
+
+}
+
+QPushButton:pressed{
+	
+	
+	background-image: url(:/main/button_pressed.png);
+	background-color: rgb(17, 86, 92);
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	color: rgb(81, 168, 177);
+	border: 2px solid rgb(1, 15, 15);
+	border-radius: 15px;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>START</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../gui_images/file_rc.qrc"/>
+ </resources>
+ <connections/>
+</ui>
