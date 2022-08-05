@@ -9,6 +9,10 @@
 * [Sobre o projeto](#sobre-o-projeto)
     * [Materiais Necessários](#materiais-necessários)
 * [Primeiros passos](#primeiros-passos)
+    * [Conexão da placa com o computador](#conexão-da-placa-com-o-computador)
+        * [Conexão serial](#conexão-serial)
+        * [Conexão via network](#conexão-via-network)
+    * [Utilização do Visual Studio Code](#utilização-do-visual-studio-code)
 
 ## Sobre o projeto
 
@@ -43,7 +47,7 @@ Um ponto importante é elaborar a comunicação da placa com o computador de des
 
 Essas duas formas podem apresentar certos problemas e dificuldades, os quais serão explicados adiante.
 
-#### Conexão Serial
+#### Conexão serial
 
 * **Cabo Serial-DB9 e Serial-USB:**
 
@@ -71,7 +75,7 @@ Para ilustrar, temos abaixo, à esquerda, imagens do conversor USB com os jumper
 
 **Obs:** quando testamos esse modo de conexão, dependendo da maneira como conectássemos os cabos, a placa não ligava. Conversando com o suporte, foi levantada a dúvida sobre o problema estar no cabo, sugerindo trocá-lo. Outras vezes que a placa conseguiu ligar, foi observado muito ruído, acreditamos que a conexão estava errada.
 
-#### Checagem da Porta Serial
+* **Checagem da porta serial**
 Para checar qual porta se encontra no computador, no terminal do Linux:
 ```
 ls /dev/ttyUSB*
@@ -133,6 +137,8 @@ Confirmar a conexão com ```yes``` e insira o login e senha:
 O VS Code possui suporte para conexão com as placas de desenvolvimento da Toradex, para isso, é necessário instalar a extensão da empresa no programa e conectar com a placa via rede ou serial.
 
 A Toradex fornece um guia bem completo para realizar essa operação na sua página de desenvolvedores, no seguinte link: [Visual Studio Code Extension for Torizon](https://developer.toradex.com/torizon/working-with-torizon/application-development/visual-studio-code-extension-for-torizon/)
+
+## Utilização da câmera
 
 ### Conexão Linux - Camera USB
 ##### Testar Camera
