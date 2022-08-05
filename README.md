@@ -1,11 +1,22 @@
 # Identifica_ai
-### Inteligência Artificial Embarcada
+<h2 align="center"> Inteligência Artificial Embarcada </h2>
 
-<img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=80% height=80%>(https://www.toradex.com/pt-br)
+<p align="center">
+    <a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=80% height=80%></a>
+</p>
 
-Identific_ai é um projeto que visa aplicar inteligência artificial de maneira embarcada.
+### Índice
+* [Sobre o projeto](#sobre-o-projeto)
+    * [Materiais Necessários](#materiais-necessários)
+* [Primeiros passos](#primeiros-passos)
 
-Para este projeto foi necessário:
+## Sobre o projeto
+
+Identific_ai é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
+
+### Materiais Necessários
+
+Foram utilizados nesse projeto:
 - Apalis IMX8 (Computer on Module);
 - Ixora Carrier Board;
 - Torizon (Computer on Module OS);
@@ -20,74 +31,97 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - 2 cabos Ethernet (Placa e computador de desenvolvimento);
 - Fonte 12V e 5A.
 
-### Conexão Serial
+## Primeiros passos
 
-##### Cabo Serial-DB9 e Serial-USB
-O cabo serial-DB9 possui uma linha vermelha que indica o conector 1 do cabo, e a placa possui uma bolinha indicando o 1 na porta X22. Quanto ao cabo Serial-USB, o USB vai conectado ao computador contendo o Linux.
+Inicialmente, é necessário preparar a estrutura, fazendo a montagem do hardware e conectando o computador de desenvolvimento à placa. Essa fase varia para cada modelo de placa utilizada, porém a Toradex fornece suporte para todos os modelos que a empresa trabalha em seu site para desenvolvedores.
+
+Conforme citado, foi utilizada a placa **Apalis IMX8 - Ixora** e recomenda-se um sistema operacional Linux no computador de desenvolvimento. Para os primeiros passos, conectando a fonte e demais periféricos à placa recomenda-se a leitura da [primeira parte do módulo 1 do Quickstart](https://developer-archives.toradex.com/getting-started/module-1-from-the-box-to-the-shell/unboxing-and-setup-cables-ixora-imx8-torizon?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux).
+
+### Conexão da placa com o computador
+
+Um ponto importante é elaborar a comunicação da placa com o computador de desenvolvimento, para isso há dois caminhos possíveis: utilizar a conexão serial ou fazer a conexão via rede.
+
+Essas duas formas podem apresentar certos problemas e dificuldades, os quais serão explicados adiante.
+
+#### Conexão Serial
+
+* **Cabo Serial-DB9 e Serial-USB:**
+
+O cabo serial-DB9 possui uma linha vermelha, a qual indica o conector 1 do cabo, já a placa possui uma bolinha, indicando o 1 na porta X22. Quanto ao cabo Serial-USB, o USB vai conectado ao computador contendo o Linux.
 
 Abaixo estão algumas fotos do cabo serial-DB9 e de como a conexão deve ser feita com a placa, conforme descrito acima.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9.jpeg" width=40% height=40%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9_conectado.jpeg" width=20% height=20%>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9.jpeg" width=45% height=40%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9_conectado.jpeg" width=20.2% height=20%>
+</p>
 
-##### Cabo USB com 3 jumpers (Rx, Tx e USB)
+* **Cabo USB com 3 jumpers (Rx, Tx e USB):**
+
 Para a ligação com o conversor USB, utilzando jumpers, é necessário conectá-los aos pinos da placa de maneira correta, na porta X22:
-- RxD - pino 3;
-- TxD - pino 5;
-- GND - pino 9;
-- Quanto ao conversor USB é só conectá-lo ao computador contendo o Linux.
+    - RxD - pino 3;
+    - TxD - pino 5;
+    - GND - pino 9;
+    - Quanto ao conversor USB é só conectá-lo ao computador contendo o Linux.
 
 Para ilustrar, temos abaixo, à esquerda, imagens do conversor USB com os jumpers, indicando as cores de cada pino *(RxD - Cinza, TxD - Roxo, GND - Preto)* e também a conexão feita na placa.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers.jpeg" width=50% height=50%>    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers_conectados.jpeg" width=40% height=40%>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers.jpeg" width=50% height=50%>    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers_conectados.jpeg" width=40% height=40%>
+</p>
 
-Obs: quando testamos esse modo de conexão, dependendo da maneira como conectássemos os cabos, a placa não ligava. Conversando com o suporte, foi levantada a dúvida sobre o problema estar no cabo, sugerindo trocá-lo. Outras vezes que a placa conseguiu ligar, foi observado muito ruído, acreditamos que a conexão estava errada.
+**Obs:** quando testamos esse modo de conexão, dependendo da maneira como conectássemos os cabos, a placa não ligava. Conversando com o suporte, foi levantada a dúvida sobre o problema estar no cabo, sugerindo trocá-lo. Outras vezes que a placa conseguiu ligar, foi observado muito ruído, acreditamos que a conexão estava errada.
 
-##### Checagem da Porta Serial
+#### Checagem da Porta Serial
 Para checar qual porta se encontra no computador, no terminal do Linux:
 ```
 ls /dev/ttyUSB*
 ```
-Possivelmente a porta conectada será: ```/dev/ttyUSB0```
-Após isso instalar o picocom através do seguinte comando e, após instalado, rodar o segundo comando:
+Possivelmente a porta conectada será: ```/dev/ttyUSB0```. Após isso, instalar o picocom e rodar o segundo comando:
 ```
 sudo apt install picocom
 sudo picocom -b 115200 /dev/ttyUSB0
 ```
 Caso o resultado do comando ```ls``` não tenha 0 como dígito final, altere no segundo comando acima. Com isso, será possível observar no terminal o que acontece no serial, permitindo a identificação da placa conectada.
 
-### Descobrir IP
- 
-No terminal do Linux, no computador desenvolvedor:
+#### Conexão via network
+
+* **Descobrindo o IP:**
+
+No terminal Linux, do computador desenvolvedor:
 ```
 ip a
 ```
 Serão printadas várias redes, procurar por ```enp ``` ou ```eth ```, na imagem abaixo está localizado no número 2.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/ip_a.png">
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/ip_a.png">
+</p>
 
 Em seguida, digite o seguinte comando, substituindo a rede encontrada. No caso da imagem: "enp2s0f1".
 
 ```
 sudo arp-scan --localnet --interface=<rede encontrada>
 ```
-Obs: Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
+**Obs:** Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
 ```
 sudo apt-get install arp-scan
 ``` 
 Dessa maneira, o IP da placa vai estar no terminal após a execução do comando, conforme a imagem abaixo.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/arpscan.png">
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/arpscan.png">
+</p>
 
 Um tutorial detalhado, fornecido pela Toradex, está localizado em [Find the board IP - Toradex](https://developer-archives.toradex.com/knowledge-base/scan-your-local-network-to-find-the-board-ip-and-mac-address).
  
-### Conexão via Network
+* **Conectando com a placa**
 
-Exercutar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
+Executar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
 ``` 
  ssh torizon@<IP>
 ``` 
 
-Obs: Após algum tempo ou caso hajam mudanças na rede conectada, esse endereço possivelmente será diferente, sendo necessário repetir o passo anterior de descobrir o IP a cada vez que o usuário trabalhe na placa.
+**Obs:** Após algum tempo ou caso hajam mudanças na rede conectada, esse endereço possivelmente será diferente, sendo necessário repetir o passo anterior de descobrir o IP a cada vez que o usuário trabalhe na placa.
 
 Confirmar a conexão com ```yes``` e insira o login e senha:
 > Login: toradex
