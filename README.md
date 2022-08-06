@@ -8,21 +8,30 @@
 <h2 align="center"> Inteligência Artificial Embarcada </h2>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30% height=40%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=70% height=80%></a>
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=60%></a>
 </p>
 
 ### Índice
-* [Sobre o projeto](#sobre-o-projeto)
+* [Sobre o projeto](#-sobre-o-projeto)
     * [Materiais Necessários](#materiais-necessários)
-* [Primeiros passos](#primeiros-passos)
+* [Primeiros passos](#-primeiros-passos)
     * [Conexão da placa com o computador](#conexão-da-placa-com-o-computador)
         * [Conexão serial](#conexão-serial)
         * [Conexão via network](#conexão-via-network)
     * [Utilização do Visual Studio Code](#utilização-do-visual-studio-code)
+    * [Interface da placa de desenvolvimento](#interface-da-placa-de-desenvolvimento)
+* [Conexão com a câmera](#-conexão-com-a-câmera)
+    * [Testando e encontrando a câmera](#testando-e-encontrando-a-câmera)
+    * [Capturando imagens da câmera usando OpenCV](#capturando-imagens-da-câmera-usando-opencv)
+* [Aplicação embarcado](#-aplicação-embarcado)
+* [Desenvolvimento da Inteligência Artificial](#-desenvolvimento-da-inteligência-artificial)
+* [Próximos passos](#-próximos-passos)
+* [Informações extras](#-informações-extras)
+* [Autores](#-autores)
 
 ---
 
-## 🧠 Sobre o projeto
+## ℹ Sobre o projeto
 
 Identific_ai é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
 
@@ -149,30 +158,41 @@ O VS Code possui suporte para conexão com as placas de desenvolvimento da Torad
 
 A Toradex fornece um guia bem completo para realizar essa operação na sua página de desenvolvedores, no seguinte link: [Visual Studio Code Extension for Torizon](https://developer.toradex.com/torizon/working-with-torizon/application-development/visual-studio-code-extension-for-torizon/)
 
+### Interface da placa de desenvolvimento
+
+Até então, tudo foi feito conectando-se remotamente a placa com o computador, porém, o microcontrolador já vem com o sistema operacional da Toradex, o **Torizon** e a aplicação utilizada para gerenciar seus containers é o **Portainer.io**. Ele já vem com alguns containers básicos e permite a instalação de outros, necessários para a aplicação do usuário. Informações de como utilizar o Portainer, iniciar, gerenciar e criar novos containers estão descritas no Módulo 2 do [Quickstart da Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux), porém recomendamos aos usuários seguirem o tutorial desde o início para sanar quaisquer dúvidas.
+
+Outra informação relevante é que, ao iniciar a placa, será necessário fornecer um login e senha para o Portainer, as credenciais utilizadas atualmente são:
+> Login: identific_ai
+
+> Senha: identificai
+
 ---
 
-## 📷 Conexão câmera
+## 📷 Conexão com a câmera
 
-### Conexão Linux - Camera USB
-##### Testar Camera
+Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV.
+
+### Testando e encontrando a câmera
+
 No terminal Linux, para instalar o gucview:
 ``` 
 sudo add-apt-repository ppa:pj-assis/testing
 sudo apt-get update
 sudo apt-get install guvcview
 ``` 
-Com isso, é so procurar por Visualizador de Vídeo.
+Com isso, é só procurar por *"Visualizador de Vídeo"*.
 
-##### Encontrar Camera
-No terminal Linux, sem conectar a camera:
+Para encontrar os endereços que estão conectando à câmera USB, mantenha-a desconectada e coloque no terminal Linux:
 ```
 cd /dev
 ls video
 ```
-Veja quais videos aparecem, no nosso caso, foram ```video0``` e ```video1```, esse são os endereços da webcam embutida ao notebook. Agora repita os comandos com a camera ligada e veja quais novos videos aparecem, esse novos são referentes a webcam USB, um dos era o ```video3```.
+Veja quais vídeos aparecem, no nosso caso, foram ```video0``` e ```video1```, esses são os endereços da webcam embutida ao notebook. Agora repita os comandos com a câmera conectada e veja quais novos vídeos aparecem, eles são referentes à webcam USB, entre os que aparecem para nós está o ```video3```.
 
-##### Capturar imagem da camera usando OpenCV
-Segue abaixo código em python para capturar a imagem da camera em Linux
+### Capturando imagens da câmera usando OpenCV
+
+Segue abaixo código em *Python* para capturar a imagem da câmera no Linux:
 ```
 python
 import cv2
@@ -192,16 +212,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-## Primeiros passos com a interface da placa de desenvolvimento
-
-Até então, tudo foi feito conectando-se remotamente a placa com o computador, porém, o microcontrolador já vem com o sistema operacional da Toradex, o **Torizon** e a aplicação utilizada para gerenciar seus containers é o **Portainer.io**. Ele já vem com alguns containers básicos e permite a instalação de outros, necessários para a aplicação do usuário. Informações de como utilizar o Portainer, iniciar, gerenciar e criar novos containers estão descritas no Módulo 2 do [Quickstart da Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux), porém recomendamos aos usuários seguirem o tutorial desde o início para sanar quaisquer dúvidas.
-
-Outra informação relevante é que, ao iniciar a placa, será necessário fornecer um login e senha para o Portainer, as credenciais utilizadas atualmente são:
-> Login: identific_ai
-
-> Senha: identificai
-
-## 💻 Aplicação Embarcado
+## 💻 Aplicação embarcado
 Uma das maneiras para transferir o código e uso da camera embarcado, é a criação de dois containers:
 - Primeiro: responsável pela conexão com a camera 
 - Segundo: responsável por realizar a interface
@@ -212,11 +223,11 @@ Alguns links importantes são:
 - [Uso do Open-CV no Torizon - Toradex](https://developer.toradex.com/torizon/how-to/machine-learning/torizon-sample-using-opencv-for-computer-vision/)
 
 
-## Desenvolvimento da Inteligência Artificial
+## 🧠 Desenvolvimento da Inteligência Artificial
 
 ---
 
-## Próximos passos
+## 💭 Próximos passos
 
 ---
 
