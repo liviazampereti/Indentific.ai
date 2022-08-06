@@ -1,8 +1,14 @@
 # Identifica_ai
+
+<p align="center">
+    <img alt="Badge em Desenvolvimento" src="https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen">
+    <img alt="Badge last commit" src="https://img.shields.io/github/last-commit/liviazampereti/Indentific.ai">
+</p>
+
 <h2 align="center"> Inteligência Artificial Embarcada </h2>
 
 <p align="center">
-    <a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=80% height=80%></a>
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30% height=40%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=70% height=80%></a>
 </p>
 
 ### Índice
@@ -186,7 +192,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-### Primeiros passos com a interface da placa de desenvolvimento
+## Primeiros passos com a interface da placa de desenvolvimento
 
 Até então, tudo foi feito conectando-se remotamente a placa com o computador, porém, o microcontrolador já vem com o sistema operacional da Toradex, o **Torizon** e a aplicação utilizada para gerenciar seus containers é o **Portainer.io**. Ele já vem com alguns containers básicos e permite a instalação de outros, necessários para a aplicação do usuário. Informações de como utilizar o Portainer, iniciar, gerenciar e criar novos containers estão descritas no Módulo 2 do [Quickstart da Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux), porém recomendamos aos usuários seguirem o tutorial desde o início para sanar quaisquer dúvidas.
 
@@ -204,6 +210,15 @@ Alguns links importantes são:
 - [Tutorial criação de container - Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux)
 - [Thread sobre acesso de camera USB no Torizon - Toradex](https://community.toradex.com/t/access-usb-camera-on-torizon-as-a-non-root-user/17054)
 - [Uso do Open-CV no Torizon - Toradex](https://developer.toradex.com/torizon/how-to/machine-learning/torizon-sample-using-opencv-for-computer-vision/)
+
+
+## Desenvolvimento da Inteligência Artificial
+
+---
+
+## Próximos passos
+
+---
 
 ## ❗ Informações extras
 - Se placa começar a reiniciar sozinha, checar a fonte, sua voltagem e o funcionamento da tomada;
