@@ -213,3 +213,10 @@ Alguns links importantes são:
   - Email: support@toradex.com
   - Telefone: (19) 3327-3732
 - A página de desenvolvedores da Toradex tem bastante informações úteis e que ajudam muito, mas elas ficam um pouco espalhadas, é preciso ter paciência e procurar bem.
+
+---
+
+## 👩‍💻 Autores
+
+| [<img src="https://avatars.githubusercontent.com/u/93014017?v=4" width=115><br><sub>Ana Letícia Garcez</sub>](https://github.com/analeticiagarcez) |  [<img src="https://avatars.githubusercontent.com/u/69127118?v=4" width=115><br><sub>Lívia Zamperetti</sub>](https://github.com/liviazampereti) |  [<img src="https://avatars.githubusercontent.com/u/79988012?v=4" width=115><br><sub>Rafael Saud</sub>](https://github.com/Rafael-Saud) |
+| :---: | :---: | :---: |
