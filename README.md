@@ -1,11 +1,43 @@
 # Identifica_ai
-### Inteligência Artificial Embarcada
 
-<img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=80% height=80%>(https://www.toradex.com/pt-br)
+<p align="center">
+    <img alt="Badge em Desenvolvimento" src="https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen">
+    <img alt="Badge last commit" src="https://img.shields.io/github/last-commit/liviazampereti/Indentific.ai">
+</p>
 
-Identific_ai é um projeto que visa aplicar inteligência artificial de maneira embarcada.
+<h2 align="center"> Inteligência Artificial Embarcada </h2>
 
-Para este projeto foi necessário:
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=60%></a>
+</p>
+
+### Índice
+* [Sobre o projeto](#-sobre-o-projeto)
+    * [Materiais Necessários](#materiais-necessários)
+* [Primeiros passos](#-primeiros-passos)
+    * [Conexão da placa com o computador](#conexão-da-placa-com-o-computador)
+        * [Conexão serial](#conexão-serial)
+        * [Conexão via network](#conexão-via-network)
+    * [Utilização do Visual Studio Code](#utilização-do-visual-studio-code)
+    * [Interface da placa de desenvolvimento](#interface-da-placa-de-desenvolvimento)
+* [Conexão com a câmera](#-conexão-com-a-câmera)
+    * [Testando e encontrando a câmera](#testando-e-encontrando-a-câmera)
+    * [Capturando imagens da câmera usando OpenCV](#capturando-imagens-da-câmera-usando-opencv)
+* [Aplicação embarcado](#-aplicação-embarcado)
+* [Desenvolvimento da Inteligência Artificial](#-desenvolvimento-da-inteligência-artificial)
+* [Próximos passos](#-próximos-passos)
+* [Informações extras](#-informações-extras)
+* [Autores](#-autores)
+
+---
+
+## ℹ Sobre o projeto
+
+Identific_ai é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
+
+### Materiais Necessários
+
+Foram utilizados nesse projeto:
 - Apalis IMX8 (Computer on Module);
 - Ixora Carrier Board;
 - Torizon (Computer on Module OS);
@@ -20,79 +52,105 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - 2 cabos Ethernet (Placa e computador de desenvolvimento);
 - Fonte 12V e 5A.
 
-### Conexão Serial
+---
 
-##### Cabo Serial-DB9 e Serial-USB
-O cabo serial-DB9 possui uma linha vermelha que indica o conector 1 do cabo, e a placa possui uma bolinha indicando o 1 na porta X22. Quanto ao cabo Serial-USB, o USB vai conectado ao computador contendo o Linux.
+## 🛠 Primeiros passos
 
-Abaixo estão algumas fotos do cabo serial-DB9 e de como a conexão deve ser feita com a placa, conforme descrito acima.
+Inicialmente, é necessário preparar a estrutura, fazendo a montagem do hardware e conectando o computador de desenvolvimento à placa. Essa fase varia para cada modelo de placa utilizada, porém a Toradex fornece suporte para todos os modelos que a empresa trabalha em seu site para desenvolvedores.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9.jpeg" width=40% height=40%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9_conectado.jpeg" width=20% height=20%>
+Conforme citado, foi utilizada a placa **Apalis IMX8 - Ixora** e recomenda-se um sistema operacional Linux no computador de desenvolvimento. Para os primeiros passos, conectando a fonte e demais periféricos à placa recomenda-se a leitura da [primeira parte do módulo 1 do Quickstart](https://developer-archives.toradex.com/getting-started/module-1-from-the-box-to-the-shell/unboxing-and-setup-cables-ixora-imx8-torizon?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux).
 
-##### Cabo USB com 3 jumpers (Rx, Tx e USB)
-Para a ligação com o conversor USB, utilzando jumpers, é necessário conectá-los aos pinos da placa de maneira correta, na porta X22:
-- RxD - pino 3;
-- TxD - pino 5;
-- GND - pino 9;
-- Quanto ao conversor USB é só conectá-lo ao computador contendo o Linux.
+### Conexão da placa com o computador
 
-Para ilustrar, temos abaixo, à esquerda, imagens do conversor USB com os jumpers, indicando as cores de cada pino *(RxD - Cinza, TxD - Roxo, GND - Preto)* e também a conexão feita na placa.
+Um ponto importante é elaborar a comunicação da placa com o computador de desenvolvimento, para isso há dois caminhos possíveis: utilizar a conexão serial ou fazer a conexão via rede.
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers.jpeg" width=50% height=50%>    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers_conectados.jpeg" width=40% height=40%>
+Essas duas formas podem apresentar certos problemas e dificuldades, os quais serão explicados adiante.
 
-Obs: quando testamos esse modo de conexão, dependendo da maneira como conectássemos os cabos, a placa não ligava. Conversando com o suporte, foi levantada a dúvida sobre o problema estar no cabo, sugerindo trocá-lo. Outras vezes que a placa conseguiu ligar, foi observado muito ruído, acreditamos que a conexão estava errada.
+#### Conexão serial
 
-##### Checagem da Porta Serial
-Para checar qual porta se encontra no computador, no terminal do Linux:
-```
-ls /dev/ttyUSB*
-```
-Possivelmente a porta conectada será: ```/dev/ttyUSB0```
-Após isso instalar o picocom através do seguinte comando e, após instalado, rodar o segundo comando:
-```
-sudo apt install picocom
-sudo picocom -b 115200 /dev/ttyUSB0
-```
-Caso o resultado do comando ```ls``` não tenha 0 como dígito final, altere no segundo comando acima. Com isso, será possível observar no terminal o que acontece no serial, permitindo a identificação da placa conectada.
+* **Cabo Serial-DB9 e Serial-USB:**
 
-### Descobrir IP
+    O cabo serial-DB9 possui uma linha vermelha, a qual indica o conector 1 do cabo, já a placa possui uma bolinha, indicando o 1 na porta X22. Quanto ao cabo Serial-USB, o USB vai conectado ao computador contendo o Linux.
+
+    Abaixo estão algumas fotos do cabo serial-DB9 e de como a conexão deve ser feita com a placa, conforme descrito acima.
+
+    <p align="center">
+        <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9.jpeg" width=45% height=40%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/db9_conectado.jpeg" width=20.2% height=20%>
+    </p>
+
+* **Cabo USB com 3 jumpers (Rx, Tx e USB):**
+
+    Para a ligação com o conversor USB, utilzando jumpers, é necessário conectá-los aos pinos da placa de maneira correta, na porta X22:
+    - RxD - pino 3;
+    - TxD - pino 5;
+    - GND - pino 9;
+    - Quanto ao conversor USB é só conectá-lo ao computador contendo o Linux.
+
+    Para ilustrar, temos abaixo, à esquerda, imagens do conversor USB com os jumpers, indicando as cores de cada pino *(RxD - Cinza, TxD - Roxo, GND - Preto)* e também a conexão feita na placa.
+
+    <p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers.jpeg" width=50% height=50%>    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/jumpers_conectados.jpeg" width=40% height=40%>
+    </p>
+
+    **Obs:** quando testamos esse modo de conexão, dependendo da maneira como conectássemos os cabos, a placa não ligava. Conversando com o suporte, foi levantada a dúvida sobre o problema estar no cabo, sugerindo trocá-lo. Outras vezes que a placa conseguiu ligar, foi observado muito ruído, acreditamos que a conexão estava errada.
+
+* **Checagem da porta serial:**
+
+    Para checar qual porta se encontra no computador, no terminal do Linux:
+    ```
+    ls /dev/ttyUSB*
+    ```
+    Possivelmente a porta conectada será: ```/dev/ttyUSB0```. Após isso, instalar o picocom e rodar o segundo comando:
+    ```
+    sudo apt install picocom
+    sudo picocom -b 115200 /dev/ttyUSB0
+    ```
+    Caso o resultado do comando ```ls``` não tenha 0 como dígito final, altere no segundo comando acima. Com isso, será possível observar no terminal o que acontece no serial, permitindo a identificação da placa conectada.
+
+#### Conexão via network
+
+* **Descobrindo o IP:**
+
+    No terminal Linux, do computador desenvolvedor:
+    ```
+    ip a
+    ```
+    Serão printadas várias redes, procurar por ```enp ``` ou ```eth ```, na imagem abaixo está localizado no número 2.
+
+    <p align="center">
+        <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/ip_a.png">
+    </p>
+
+    Em seguida, digite o seguinte comando, substituindo a rede encontrada. No caso da imagem: "enp2s0f1".
+
+    ```
+    sudo arp-scan --localnet --interface=<rede encontrada>
+    ```
+    **Obs:** Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
+    ```
+    sudo apt-get install arp-scan
+    ``` 
+    Dessa maneira, o IP da placa vai estar no terminal após a execução do comando, conforme a imagem abaixo.
+
+    <p align="center">
+        <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/arpscan.png">
+    </p>
+
+    Um tutorial detalhado, fornecido pela Toradex, está localizado em [Find the board IP - Toradex](https://developer-archives.toradex.com/knowledge-base/scan-your-local-network-to-find-the-board-ip-and-mac-address).
  
-No terminal do Linux, no computador desenvolvedor:
-```
-ip a
-```
-Serão printadas várias redes, procurar por ```enp ``` ou ```eth ```, na imagem abaixo está localizado no número 2.
+* **Conectando com a placa**
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/ip_a.png">
+    Executar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
+    ``` 
+    ssh torizon@<IP>
+    ``` 
 
-Em seguida, digite o seguinte comando, substituindo a rede encontrada. No caso da imagem: "enp2s0f1".
+    **Obs:** Após algum tempo ou caso hajam mudanças na rede conectada, esse endereço possivelmente será diferente, sendo necessário repetir o passo anterior de descobrir o IP a cada vez que o usuário trabalhe na placa.
 
-```
-sudo arp-scan --localnet --interface=<rede encontrada>
-```
-Obs: Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
-```
-sudo apt-get install arp-scan
-``` 
-Dessa maneira, o IP da placa vai estar no terminal após a execução do comando, conforme a imagem abaixo.
+    Confirmar a conexão com ```yes``` e insira o login e senha:
+    > Login: toradex
 
-<img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/arpscan.png">
-
-Um tutorial detalhado, fornecido pela Toradex, está localizado em [Find the board IP - Toradex](https://developer-archives.toradex.com/knowledge-base/scan-your-local-network-to-find-the-board-ip-and-mac-address).
- 
-### Conexão via Network
-
-Exercutar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
-``` 
- ssh torizon@<IP>
-``` 
-
-Obs: Após algum tempo ou caso hajam mudanças na rede conectada, esse endereço possivelmente será diferente, sendo necessário repetir o passo anterior de descobrir o IP a cada vez que o usuário trabalhe na placa.
-
-Confirmar a conexão com ```yes``` e insira o login e senha:
-> Login: toradex
-
-> Senha: 123
+    > Senha: 123
 
 ### Utilização do Visual Studio Code
 
@@ -100,27 +158,41 @@ O VS Code possui suporte para conexão com as placas de desenvolvimento da Torad
 
 A Toradex fornece um guia bem completo para realizar essa operação na sua página de desenvolvedores, no seguinte link: [Visual Studio Code Extension for Torizon](https://developer.toradex.com/torizon/working-with-torizon/application-development/visual-studio-code-extension-for-torizon/)
 
-### Conexão Linux - Camera USB
-##### Testar Camera
+### Interface da placa de desenvolvimento
+
+Até então, tudo foi feito conectando-se remotamente a placa com o computador, porém, o microcontrolador já vem com o sistema operacional da Toradex, o **Torizon** e a aplicação utilizada para gerenciar seus containers é o **Portainer.io**. Ele já vem com alguns containers básicos e permite a instalação de outros, necessários para a aplicação do usuário. Informações de como utilizar o Portainer, iniciar, gerenciar e criar novos containers estão descritas no Módulo 2 do [Quickstart da Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux), porém recomendamos aos usuários seguirem o tutorial desde o início para sanar quaisquer dúvidas.
+
+Outra informação relevante é que, ao iniciar a placa, será necessário fornecer um login e senha para o Portainer, as credenciais utilizadas atualmente são:
+> Login: identific_ai
+
+> Senha: identificai
+
+---
+
+## 📷 Conexão com a câmera
+
+Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV.
+
+### Testando e encontrando a câmera
+
 No terminal Linux, para instalar o gucview:
 ``` 
 sudo add-apt-repository ppa:pj-assis/testing
 sudo apt-get update
 sudo apt-get install guvcview
 ``` 
-Com isso, é so procurar por Visualizador de Vídeo.
+Com isso, é só procurar por *"Visualizador de Vídeo"*.
 
-##### Encontrar Camera
-No terminal Linux, sem conectar a camera:
+Para encontrar os endereços que estão conectando à câmera USB, mantenha-a desconectada e coloque no terminal Linux:
 ```
 cd /dev
 ls video
 ```
-Veja quais videos aparecem, no nosso, foram ```video0``` e ```video1```, esse são os endereços da webcam embutida no notebook.
-Agora repita os comandos com a camera ligada e veja quais novos videos aparecem, esse novos são referentes a webcam USB, um dos era o ```video3```.
+Veja quais vídeos aparecem, no nosso caso, foram ```video0``` e ```video1```, esses são os endereços da webcam embutida ao notebook. Agora repita os comandos com a câmera conectada e veja quais novos vídeos aparecem, eles são referentes à webcam USB, entre os que aparecem para nós está o ```video3```.
 
-##### Capturar imagem da camera usando OpenCV
-Segue abaixo código em python para capturar a imagem da camera em Linux
+### Capturando imagens da câmera usando OpenCV
+
+Segue abaixo código em *Python* para capturar a imagem da câmera no Linux:
 ```
 python
 import cv2
@@ -140,16 +212,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-### Primeiros passos com a interface da placa de desenvolvimento
-
-Até então, tudo foi feito conectando-se remotamente a placa com o computador, porém, o microcontrolador já vem com o sistema operacional da Toradex, o **Torizon** e a aplicação utilizada para gerenciar seus containers é o **Portainer.io**. Ele já vem com alguns containers básicos e permite a instalação de outros, necessários para a aplicação do usuário. Informações de como utilizar o Portainer, iniciar, gerenciar e criar novos containers estão descritas no Módulo 2 do [Quickstart da Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux), porém recomendamos aos usuários seguirem o tutorial desde o início para sanar quaisquer dúvidas.
-
-Outra informação relevante é que, ao iniciar a placa, será necessário fornecer um login e senha para o Portainer, as credenciais utilizadas atualmente são:
-> Login: identific_ai
-
-> Senha: identificai
-
-### Aplicação Embarcado
+## 💻 Aplicação embarcado
 Uma das maneiras para transferir o código e uso da camera embarcado, é a criação de dois containers:
 - Primeiro: responsável pela conexão com a camera 
 - Segundo: responsável por realizar a interface
@@ -159,7 +222,16 @@ Alguns links importantes são:
 - [Thread sobre acesso de camera USB no Torizon - Toradex](https://community.toradex.com/t/access-usb-camera-on-torizon-as-a-non-root-user/17054)
 - [Uso do Open-CV no Torizon - Toradex](https://developer.toradex.com/torizon/how-to/machine-learning/torizon-sample-using-opencv-for-computer-vision/)
 
-### Informações extras
+
+## 🧠 Desenvolvimento da Inteligência Artificial
+
+---
+
+## 💭 Próximos passos
+
+---
+
+## ❗ Informações extras
 - Se placa começar a reiniciar sozinha, checar a fonte, sua voltagem e o funcionamento da tomada;
 - O Torizon trabalha com vários containers, inclusive o terminal é um container;
 - A Toradex tem um suporte bem eficiente e com respostas bem rápidas para casos de dúvidas ou problemas técnicos, entre as possíveis formas de suporte estão:
@@ -167,3 +239,10 @@ Alguns links importantes são:
   - Email: support@toradex.com
   - Telefone: (19) 3327-3732
 - A página de desenvolvedores da Toradex tem bastante informações úteis e que ajudam muito, mas elas ficam um pouco espalhadas, é preciso ter paciência e procurar bem.
+
+---
+
+## 👩‍💻 Autores
+
+| [<img src="https://avatars.githubusercontent.com/u/93014017?v=4" width=115><br><sub>Ana Letícia Garcez</sub>](https://github.com/analeticiagarcez) |  [<img src="https://avatars.githubusercontent.com/u/69127118?v=4" width=115><br><sub>Lívia Zamperetti</sub>](https://github.com/liviazampereti) |  [<img src="https://avatars.githubusercontent.com/u/79988012?v=4" width=115><br><sub>Rafael Saud</sub>](https://github.com/Rafael-Saud) |
+| :---: | :---: | :---: |
