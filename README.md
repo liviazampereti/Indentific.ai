@@ -13,7 +13,13 @@
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=60%></a>
 </p>
 
-### Índice
+<details>
+<summary>
+
+## Índice
+
+</summary>
+
 * [Sobre o projeto](#-sobre-o-projeto)
     * [Materiais Necessários](#materiais-necessários)
 * [Primeiros passos](#-primeiros-passos)
@@ -37,6 +43,8 @@
 * [Próximos passos](#-próximos-passos)
 * [Informações extras](#-informações-extras)
 * [Autores](#-autores)
+
+</details>
 
 ---
 
