@@ -20,10 +20,12 @@
         * [Conexão via network](#conexão-via-network)
     * [Utilização do Visual Studio Code](#utilização-do-visual-studio-code)
     * [Interface da placa de desenvolvimento](#interface-da-placa-de-desenvolvimento)
-* [Conexão com a câmera](#-conexão-com-a-câmera)
+* [Testes iniciais com a câmera](#-testes-iniciais-com-a-câmera)
     * [Testando e encontrando a câmera](#testando-e-encontrando-a-câmera)
     * [Capturando imagens da câmera usando OpenCV](#capturando-imagens-da-câmera-usando-opencv)
-* [Aplicação embarcado](#-aplicação-embarcado)
+
+#### [Aplicação embarcado](#-aplicação-embarcado)
+* 
 * [Desenvolvimento da Inteligência Artificial](#-desenvolvimento-da-inteligência-artificial)
 * [Próximos passos](#-próximos-passos)
 * [Informações extras](#-informações-extras)
@@ -33,7 +35,7 @@
 
 ## ℹ Sobre o projeto
 
-Identific_ai é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
+***Identific_ai*** é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
 
 ### Materiais Necessários
 
@@ -97,11 +99,11 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Checagem da porta serial:**
 
     Para checar qual porta se encontra no computador, no terminal do Linux:
-    ```
+    ```bash
     ls /dev/ttyUSB*
     ```
     Possivelmente a porta conectada será: ```/dev/ttyUSB0```. Após isso, instalar o picocom e rodar o segundo comando:
-    ```
+    ```bash
     sudo apt install picocom
     sudo picocom -b 115200 /dev/ttyUSB0
     ```
@@ -112,7 +114,7 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Descobrindo o IP:**
 
     No terminal Linux, do computador desenvolvedor:
-    ```
+    ```bash
     ip a
     ```
     Serão printadas várias redes, procurar por ```enp ``` ou ```eth ```, na imagem abaixo está localizado no número 2.
@@ -123,11 +125,11 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 
     Em seguida, digite o seguinte comando, substituindo a rede encontrada. No caso da imagem: "enp2s0f1".
 
-    ```
+    ```bash
     sudo arp-scan --localnet --interface=<rede encontrada>
     ```
     **Obs:** Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
-    ```
+    ```bash
     sudo apt-get install arp-scan
     ``` 
     Dessa maneira, o IP da placa vai estar no terminal após a execução do comando, conforme a imagem abaixo.
@@ -141,7 +143,7 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Conectando com a placa**
 
     Executar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
-    ``` 
+    ```bash
     ssh torizon@<IP>
     ``` 
 
@@ -169,14 +171,29 @@ Outra informação relevante é que, ao iniciar a placa, será necessário forne
 
 ---
 
-## 📷 Conexão com a câmera
+## 📡 Conexão wi-fi
 
-Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV.
+Entre os periféricos que acompanham o sistema embarcado está uma antena para permitir comunicação wi-fi da placa, como mostra a imagem abaixo.
+
+**COLOCAR IMAGEM**
+
+Para se conectar com uma rede, devem ser seguidos os seguintes passos, no terminal da placa:
+```bash
+$ sudo -i
+## aaaaa
+```
+
+
+---
+
+## 📷 Testes iniciais com a câmera
+
+Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV, utilizando o próprio computador.
 
 ### Testando e encontrando a câmera
 
 No terminal Linux, para instalar o gucview:
-``` 
+```bash
 sudo add-apt-repository ppa:pj-assis/testing
 sudo apt-get update
 sudo apt-get install guvcview
@@ -184,7 +201,7 @@ sudo apt-get install guvcview
 Com isso, é só procurar por *"Visualizador de Vídeo"*.
 
 Para encontrar os endereços que estão conectando à câmera USB, mantenha-a desconectada e coloque no terminal Linux:
-```
+```bash
 cd /dev
 ls video
 ```
@@ -193,7 +210,7 @@ Veja quais vídeos aparecem, no nosso caso, foram ```video0``` e ```video1```, e
 ### Capturando imagens da câmera usando OpenCV
 
 Segue abaixo código em *Python* para capturar a imagem da câmera no Linux:
-```
+```python
 python
 import cv2
 
@@ -212,7 +229,17 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-## 💻 Aplicação embarcado
+> Vale ressaltar que tudo isso deve ser feito no computador de desenvolvimento, visando checar o funcionamento da câmera e do código.
+
+---
+
+# 💻 Aplicação embarcado
+
+Agora, considerando que todos os componentes foram devidamente testados e estão funcionando, vamos focar na aplicação do ***Identific_ai*** para o sistema embarcado.
+
+##
+
+## Sla
 Uma das maneiras para transferir o código e uso da camera embarcado, é a criação de dois containers:
 - Primeiro: responsável pela conexão com a camera 
 - Segundo: responsável por realizar a interface
