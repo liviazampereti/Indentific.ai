@@ -61,7 +61,7 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - 2 cabos Ethernet (Placa e computador de desenvolvimento);
 - Fonte 12V e 5A.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
 
@@ -329,6 +329,10 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/codigo_cam_rodando.jpeg">
+</p>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg">
 </p>
 
 GIF
