@@ -1,5 +1,7 @@
 # Identific.ai
 
+<a name="readme-top"></a>
+
 <p align="center">
     <img alt="Badge em Desenvolvimento" src="https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen">
     <img alt="Badge last commit" src="https://img.shields.io/github/last-commit/liviazampereti/Indentific.ai">
@@ -58,6 +60,8 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - Cabo Serial-DB9 e Serial-USB *ou* Conversor USB com 3 jumpers (Rx, Tx e GND);
 - 2 cabos Ethernet (Placa e computador de desenvolvimento);
 - Fonte 12V e 5A.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
