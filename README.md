@@ -16,7 +16,7 @@
 <details>
 <summary>
 
-## Índice
+## 📃 Índice
 
 </summary>
 
@@ -32,7 +32,7 @@
     * [Testando e encontrando a câmera](#testando-e-encontrando-a-câmera)
     * [Capturando imagens da câmera usando OpenCV](#capturando-imagens-da-câmera-usando-opencv)
 
-#### [💻 Aplicação embarcado](#-aplicação-embarcado)
+### [💻 Aplicação embarcado](#-aplicação-embarcado)
 * [Conexão wi-fi](#-conexão-wi-fi)
 * [Capturando imagens com a placa](#-capturando-imagens-com-a-placa)
     * [Criando o container](#-criando-o-container)
