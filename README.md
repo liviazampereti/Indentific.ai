@@ -363,6 +363,16 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
 
 ## 🧠 Desenvolvimento da Inteligência Artificial
 
+### YOLO
+
+Para o reconhecimento das faces será usada a rede neural YOLO, capaz de detectar e classificar objetos, visando o nosso objetivo ela precisa ser treinada com um dataset próprio. Essa rede foi escolhida por ser mais leve, logo, facilitando a implementação em um sistema embarcado e todo o seu desenvolvimento foi feito em *Pytorch*, para ser utilizada pré-treinada.
+
+Os arquivos necessários para uso e instalação dessa rede estão na pasta [YOLOV5](https://github.com/liviazampereti/Indentific.ai/tree/master/YOLOV5) deste repositório, incluindo um README explicando passo a passo.
+
+### Interface com o usuário (GUI)
+
+Também foi elaborada uma GUI para permitir a comunicação do usuário com a aplicação, o programa foi elaborado utilizando o framework Qt e em Python, os códigos e algumas imagens da interface estão na pasta [gui](https://github.com/liviazampereti/Indentific.ai/tree/master/gui) do repositório. Devido à complexidade do projeto como um todo, ainda não foi criado o container responsável pela GUI no Docker, nem sua implementação.
+
 <p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
@@ -383,7 +393,15 @@ Alguns links importantes são:
 
 ## 💭 Próximos passos
 
+Entre os próximos passos para a finalização do projeto estão:
+
+- Aperfeiçoamento e estabilização da captura de imagens;
+- Adaptação das imagens capturadas, para que sejam aplicadas ne rede neural;
+- Melhorias na interface do usuário e integração com o sistema;
+- Criação de containers para cada função do sistema;
+- Treinamento da YOLO para reconhecimento de faces;
 - Testagem da YOLO embarcada com a câmera;
+- Correção de eventuais bugs e melhorias.
 
 <p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
