@@ -1,4 +1,6 @@
-# Identifica_ai
+# Identific.ai
+
+<a name="readme-top"></a>
 
 <p align="center">
     <img alt="Badge em Desenvolvimento" src="https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen">
@@ -11,7 +13,13 @@
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/gui/main.png" width=30%><a href="https://www.toradex.com/pt-br"><img src="https://docs.toradex.com/108455-toradex-logo-1200-630.png" width=60%></a>
 </p>
 
-### Índice
+<details>
+<summary>
+
+## 📃 Índice
+
+</summary>
+
 * [Sobre o projeto](#-sobre-o-projeto)
     * [Materiais Necessários](#materiais-necessários)
 * [Primeiros passos](#-primeiros-passos)
@@ -20,20 +28,33 @@
         * [Conexão via network](#conexão-via-network)
     * [Utilização do Visual Studio Code](#utilização-do-visual-studio-code)
     * [Interface da placa de desenvolvimento](#interface-da-placa-de-desenvolvimento)
-* [Conexão com a câmera](#-conexão-com-a-câmera)
+* [Testes iniciais com a câmera](#-testes-iniciais-com-a-câmera)
     * [Testando e encontrando a câmera](#testando-e-encontrando-a-câmera)
     * [Capturando imagens da câmera usando OpenCV](#capturando-imagens-da-câmera-usando-opencv)
-* [Aplicação embarcado](#-aplicação-embarcado)
+
+### [💻 Aplicação embarcado](#-aplicação-embarcado)
+* [Conexão wi-fi](#-conexão-wi-fi)
+* [Capturando imagens com a placa](#-capturando-imagens-com-a-placa)
+    * [Criando o container](#-criando-o-container)
+    * [Verificando endereço da webcam](#-verificando-endereço-da-webcam)
+    * [Carregando o container na placa](#-carregando-o-container-na-placa)
 * [Desenvolvimento da Inteligência Artificial](#-desenvolvimento-da-inteligência-artificial)
+* [Integração IA com a câmera](#-integração-ia-com-a-câmera)
 * [Próximos passos](#-próximos-passos)
 * [Informações extras](#-informações-extras)
 * [Autores](#-autores)
+
+</details>
 
 ---
 
 ## ℹ Sobre o projeto
 
-Identific_ai é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
+***Identific.ai*** é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/board.jpeg" width=50%>
+</p>
 
 ### Materiais Necessários
 
@@ -48,9 +69,14 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - Teclado USB;
 - Mouse USB;
 - Monitor;
+- Apalis Heatsink Fan
+- Antena e cabo wi-fi
 - Cabo Serial-DB9 e Serial-USB *ou* Conversor USB com 3 jumpers (Rx, Tx e GND);
 - 2 cabos Ethernet (Placa e computador de desenvolvimento);
 - Fonte 12V e 5A.
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
+<div align="right"> <a href="#----">⏫ voltar ao início</a> </div>
 
 ---
 
@@ -97,13 +123,13 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Checagem da porta serial:**
 
     Para checar qual porta se encontra no computador, no terminal do Linux:
-    ```
-    ls /dev/ttyUSB*
+    ```bash
+    $ ls /dev/ttyUSB*
     ```
     Possivelmente a porta conectada será: ```/dev/ttyUSB0```. Após isso, instalar o picocom e rodar o segundo comando:
-    ```
-    sudo apt install picocom
-    sudo picocom -b 115200 /dev/ttyUSB0
+    ```bash
+    $ sudo apt install picocom
+    $ sudo picocom -b 115200 /dev/ttyUSB0
     ```
     Caso o resultado do comando ```ls``` não tenha 0 como dígito final, altere no segundo comando acima. Com isso, será possível observar no terminal o que acontece no serial, permitindo a identificação da placa conectada.
 
@@ -112,8 +138,8 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Descobrindo o IP:**
 
     No terminal Linux, do computador desenvolvedor:
-    ```
-    ip a
+    ```bash
+    $ ip a
     ```
     Serão printadas várias redes, procurar por ```enp ``` ou ```eth ```, na imagem abaixo está localizado no número 2.
 
@@ -123,12 +149,12 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 
     Em seguida, digite o seguinte comando, substituindo a rede encontrada. No caso da imagem: "enp2s0f1".
 
-    ```
-    sudo arp-scan --localnet --interface=<rede encontrada>
+    ```bash
+    $ sudo arp-scan --localnet --interface=<rede encontrada>
     ```
     **Obs:** Caso o computador não encontre o comando digitado, digite o código abaixo e repita os passos descritos:
-    ```
-    sudo apt-get install arp-scan
+    ```bash
+    $ sudo apt-get install arp-scan
     ``` 
     Dessa maneira, o IP da placa vai estar no terminal após a execução do comando, conforme a imagem abaixo.
 
@@ -141,8 +167,8 @@ Essas duas formas podem apresentar certos problemas e dificuldades, os quais ser
 * **Conectando com a placa**
 
     Executar o seguinte comando, substituindo o IP pelo endereço encontrado acima:
-    ``` 
-    ssh torizon@<IP>
+    ```bash
+    $ ssh torizon@<IP>
     ``` 
 
     **Obs:** Após algum tempo ou caso hajam mudanças na rede conectada, esse endereço possivelmente será diferente, sendo necessário repetir o passo anterior de descobrir o IP a cada vez que o usuário trabalhe na placa.
@@ -169,31 +195,31 @@ Outra informação relevante é que, ao iniciar a placa, será necessário forne
 
 ---
 
-## 📷 Conexão com a câmera
+## 📷 Testes iniciais com a câmera
 
-Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV.
+Para a realização do projeto é necessário uma câmera USB, a qual será conectada posteriormente na placa de desenvolvimento. Porém, antes é importante testar o funcionamento da câmera e o uso da biblioteca OpenCV, utilizando o próprio computador.
 
 ### Testando e encontrando a câmera
 
 No terminal Linux, para instalar o gucview:
-``` 
-sudo add-apt-repository ppa:pj-assis/testing
-sudo apt-get update
-sudo apt-get install guvcview
+```bash
+$ sudo add-apt-repository ppa:pj-assis/testing
+$ sudo apt-get update
+$ sudo apt-get install guvcview
 ``` 
 Com isso, é só procurar por *"Visualizador de Vídeo"*.
 
 Para encontrar os endereços que estão conectando à câmera USB, mantenha-a desconectada e coloque no terminal Linux:
-```
-cd /dev
-ls video
+```bash
+$ cd /dev
+$ ls video
 ```
 Veja quais vídeos aparecem, no nosso caso, foram ```video0``` e ```video1```, esses são os endereços da webcam embutida ao notebook. Agora repita os comandos com a câmera conectada e veja quais novos vídeos aparecem, eles são referentes à webcam USB, entre os que aparecem para nós está o ```video3```.
 
 ### Capturando imagens da câmera usando OpenCV
 
 Segue abaixo código em *Python* para capturar a imagem da câmera no Linux:
-```
+```python
 python
 import cv2
 
@@ -212,18 +238,137 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-## 💻 Aplicação embarcado
+> Vale ressaltar que tudo isso deve ser feito no computador de desenvolvimento, visando checar o funcionamento da câmera e do código.
+
+---
+
+# 💻 Aplicação embarcado
+
+Agora, considerando que todos os componentes foram devidamente testados e estão funcionando, vamos focar na aplicação do ***Identific.ai*** para o sistema embarcado.
+
+## 📡 Conexão wi-fi
+
+Entre os periféricos que acompanham o sistema embarcado está uma antena para permitir comunicação wi-fi da placa, como mostra a imagem abaixo.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/antena.jpeg" width=50%>
+</p>
+
+Para se conectar com uma rede, devem ser seguidos os seguintes passos no terminal da placa, acessado via ssh:
+```bash
+$ sudo -i
+Password: 
+```
+> A senha é a mesma da conexão ssh
+
+Após isso, insira a seguinte sequência de comandos:
+```bash
+$ rfkill unblock all
+$ nmcli radio wifi on
+$ nmcli dev wifi list
+```
+
+Será printada uma lista com todas as redes disponíveis para conexão, conforme a imagem abaixo:
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/wifi1.jpeg">
+</p>
+
+Selecione a sua rede e conecte com o comando abaixo, digitando em seguida a senha do wi-fi:
+
+```bash
+$ nmcli --ask dev wifi connect <Nome da rede>
+Password: 
+
+$ ifconfig mlan0
+```
+
+Caso esteja tudo certo, o resultado será:
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/wifi2.jpeg">
+</p>
+
+---
+
+## 📸 Capturando imagens com a placa
+
+### Criando o container
+
+Inicialmente é necessário clonar o repositório de *samples* da Toradex no computador de desenvolvimento, disponível no [Github](https://github.com/toradex/torizon-samples)
+
+```bash
+$ git clone https://github.com/toradex/torizon-samples
+```
+
+Neste Github estão os arquivos para do GStreamer, um framework que permite o desenvolvimento de aplicações com captura de imagens. Para a sua utilização na placa, será necessário construir um container com a aplicação e carregá-lo em uma conta Docker, seguindo os seguintes comandos no computador:
+
+```bash
+$ cd ~/torizon-samples/gstreamer/bash/simple-pipeline
+$ docker build --build-arg BASE_NAME=wayland-base-vivante --build-arg IMAGE_ARCH=linux/arm64/v8 -t <username_dockerhub>/<dockerfile_name>
+$ docker push <dockerhub-username>/<dockerfile_name>
+```
+
+Após esperar o código rodar *(pode levar um tempo)*, é importante conferir se o upload foi concluído com sucesso, verificando o seu dockerhub
+
+> Para evitar confusões ao analisar os próximos prints, os nomes de usuário e arquivo usados no Docker foram, respectivamente, ```identificai``` e ```gst_example```.
+
+### Verificando endereço da webcam
+
+Será necessário verificar qual endereço a placa está dando para a webcam, similarmente como foi feito para os testes no computador, para isso deve ser utilizado o comando ```ls /dev/video*``` com o USB desconectado da placa e então repetir com ele conectado. 
+
+Nos dois casos serão printados alguns endereços, conforme imagem abaixo. Os que aparecerem apenas no segundo comando são os endereços a ser utilizados posteriormente.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/ident_cam.jpeg">
+</p>
+
+> No nosso caso e no decorrer do documento serão usados `video2` e `video3`.
+
+### Carregando o container na placa
+
+Agora, o container carregado no Dockerhub será instalado na placa, para isso, acessando a placa via conexão ssh
+
+```bash
+$ docker pull <dockerhub-username>/<dockerfile_name>
+$ docker run --rm -it -v /tmp:/tmp -v /var/run/dbus:/var/run/dbus -v /dev:/dev -v /sys:/sys \
+    --device /dev/video2 --device /dev/video3\
+    --device-cgroup-rule='c 199:* rmw' \
+    <dockerhub-username>/<dockerfile_name>
+# Lembrar de alternar os videos no comando anterior, caso os endereços obtidos sejam diferentes
+
+# Testando as duas entradas de vídeo
+$ gst-launch-1.0 v4l2src device='/dev/video2'  ! "video/x-raw, format=YUY2, framerate=5/1, width=640, height=480" ! fpsdisplaysink video-sink=waylandsink text-overlay=false sync=false
+$ gst-launch-1.0 v4l2src device='/dev/video3'  ! "video/x-raw, format=YUY2, framerate=5/1, width=640, height=480" ! fpsdisplaysink video-sink=waylandsink text-overlay=false sync=false
+```
+
+Com um dos dois últimos comandos, um temporizador estará disponível no terminal e o vídeo exibido no monitor, conforme as imagens e gif abaixo:
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/codigo_cam_rodando.jpeg">
+</p>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg">
+</p>
+
+GIF
+
+---
+
+## 🧠 Desenvolvimento da Inteligência Artificial
+
+---
+
+## 🔗 Integração IA com a câmera
 Uma das maneiras para transferir o código e uso da camera embarcado, é a criação de dois containers:
-- Primeiro: responsável pela conexão com a camera 
-- Segundo: responsável por realizar a interface
+- Primeiro: responsável pela conexão com a câmera, como já foi explicado no documento; 
+- Segundo: responsável por realizar a interface gráfica e o processamento.
 
 Alguns links importantes são:
 - [Tutorial criação de container - Toradex](https://developer-archives.toradex.com/getting-started?som=apalis-imx8&board=ixora-carrier-board&os=torizon&desktop=linux)
 - [Thread sobre acesso de camera USB no Torizon - Toradex](https://community.toradex.com/t/access-usb-camera-on-torizon-as-a-non-root-user/17054)
 - [Uso do Open-CV no Torizon - Toradex](https://developer.toradex.com/torizon/how-to/machine-learning/torizon-sample-using-opencv-for-computer-vision/)
-
-
-## 🧠 Desenvolvimento da Inteligência Artificial
 
 ---
 
