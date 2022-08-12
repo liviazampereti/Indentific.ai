@@ -77,6 +77,7 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 
 <p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 <div align="right"> <a href="#----">⏫ voltar ao início</a> </div>
+
 ---
 
 ## 🛠 Primeiros passos
