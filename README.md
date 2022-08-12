@@ -354,11 +354,7 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg" width=50%>
-</p>
-
-<p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/gif_camera.gif" width=50%>
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg" width=40%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/gif_camera.gif" width=53%>
 </p>
 
 <p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
