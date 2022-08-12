@@ -35,10 +35,12 @@
 ### [💻 Aplicação embarcado](#-aplicação-embarcado)
 * [Conexão wi-fi](#-conexão-wi-fi)
 * [Capturando imagens com a placa](#-capturando-imagens-com-a-placa)
-    * [Criando o container](#-criando-o-container)
-    * [Verificando endereço da webcam](#-verificando-endereço-da-webcam)
-    * [Carregando o container na placa](#-carregando-o-container-na-placa)
+    * [Criando o container](#criando-o-container)
+    * [Verificando endereço da webcam](#verificando-endereço-da-webcam)
+    * [Carregando o container na placa](#carregando-o-container-na-placa)
 * [Desenvolvimento da Inteligência Artificial](#-desenvolvimento-da-inteligência-artificial)
+    * [YOLO](#yolo)
+    * [Interface com o usuário (GUI)](#interface-com-o-usuário-gui)
 * [Integração IA com a câmera](#-integração-ia-com-a-câmera)
 * [Próximos passos](#-próximos-passos)
 * [Informações extras](#-informações-extras)
@@ -365,7 +367,13 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
 
 ### YOLO
 
-Para o reconhecimento das faces será usada a rede neural YOLO, capaz de detectar e classificar objetos, visando o nosso objetivo ela precisa ser treinada com um dataset próprio. Essa rede foi escolhida por ser mais leve, logo, facilitando a implementação em um sistema embarcado e todo o seu desenvolvimento foi feito em *Pytorch*, para ser utilizada pré-treinada.
+Para o reconhecimento das faces será usada a rede neural YOLO, capaz de detectar e classificar objetos, visando o nosso objetivo ela precisa ser treinada com um dataset próprio. Essa rede foi escolhida por ser mais leve, logo, facilitando a implementação em um sistema embarcado e todo o seu desenvolvimento foi feito em *Pytorch*.
+
+A arquitetura visa a extração das chamadas features, ou seja, características que contribuem para a classificação. Feito essa extração, o algoritmo cria várias bounding boxes e um mapa de probabilidade de classes, de maneira a obter os objetos que buscamos identificar e suas respectivas bounding boxes. Abaixo estão algumas imagens ilustrando a arquitetura e o comportamento da rede:
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/yolo1.jpeg" width=48%> <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/yolo2.jpeg" width=40%>
+</p>
 
 Os arquivos necessários para uso e instalação dessa rede estão na pasta [YOLOV5](https://github.com/liviazampereti/Indentific.ai/tree/master/YOLOV5) deste repositório, incluindo um README explicando passo a passo.
 
