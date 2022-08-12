@@ -352,7 +352,9 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg">
 </p>
 
-GIF
+<p align="center">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/gif_camera.gif" width=50%>
+</p>
 
 ---
 
