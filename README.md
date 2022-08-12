@@ -76,7 +76,6 @@ Com essas informações, foi possível obter o [Quickstart da Toradex](https://d
 - Fonte 12V e 5A.
 
 <p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
-<div align="right"> <a href="#----">⏫ voltar ao início</a> </div>
 
 ---
 
@@ -193,6 +192,8 @@ Outra informação relevante é que, ao iniciar a placa, será necessário forne
 
 > Senha: identificai
 
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
+
 ---
 
 ## 📷 Testes iniciais com a câmera
@@ -239,6 +240,8 @@ cv2.destroyAllWindows()
 ```
 
 > Vale ressaltar que tudo isso deve ser feito no computador de desenvolvimento, visando checar o funcionamento da câmera e do código.
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
 
@@ -288,6 +291,8 @@ Caso esteja tudo certo, o resultado será:
 <p align="center">
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/wifi2.jpeg">
 </p>
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
 
@@ -356,9 +361,13 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
     <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/gif_camera.gif" width=50%>
 </p>
 
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
+
 ---
 
 ## 🧠 Desenvolvimento da Inteligência Artificial
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
 
@@ -372,9 +381,15 @@ Alguns links importantes são:
 - [Thread sobre acesso de camera USB no Torizon - Toradex](https://community.toradex.com/t/access-usb-camera-on-torizon-as-a-non-root-user/17054)
 - [Uso do Open-CV no Torizon - Toradex](https://developer.toradex.com/torizon/how-to/machine-learning/torizon-sample-using-opencv-for-computer-vision/)
 
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
+
 ---
 
 ## 💭 Próximos passos
+
+- Testagem da YOLO embarcada com a câmera;
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
 
 ---
 
@@ -387,9 +402,13 @@ Alguns links importantes são:
   - Telefone: (19) 3327-3732
 - A página de desenvolvedores da Toradex tem bastante informações úteis e que ajudam muito, mas elas ficam um pouco espalhadas, é preciso ter paciência e procurar bem.
 
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
+
 ---
 
 ## 👩‍💻 Autores
 
 | [<img src="https://avatars.githubusercontent.com/u/93014017?v=4" width=115><br><sub>Ana Letícia Garcez</sub>](https://github.com/analeticiagarcez) |  [<img src="https://avatars.githubusercontent.com/u/69127118?v=4" width=115><br><sub>Lívia Zamperetti</sub>](https://github.com/liviazampereti) |  [<img src="https://avatars.githubusercontent.com/u/79988012?v=4" width=115><br><sub>Rafael Saud</sub>](https://github.com/Rafael-Saud) |
 | :---: | :---: | :---: |
+
+<p align="right">(<a href="#readme-top">voltar ao início</a>)</p>
