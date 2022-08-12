@@ -53,7 +53,7 @@
 ***Identific.ai*** é um projeto que visa aplicar inteligência artificial para realizar a classificação de imagens com auxílio de uma câmera USB, tudo isso utilizando a estrutura embarcada de uma placa de desenvolvimento Toradex.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/board.jpeg" width=50%>
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/board.jpeg" width=30%>
 </p>
 
 ### Materiais Necessários
@@ -254,7 +254,7 @@ Agora, considerando que todos os componentes foram devidamente testados e estão
 Entre os periféricos que acompanham o sistema embarcado está uma antena para permitir comunicação wi-fi da placa, como mostra a imagem abaixo.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/antena.jpeg" width=50%>
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/antena.jpeg" width=40%>
 </p>
 
 Para se conectar com uma rede, devem ser seguidos os seguintes passos no terminal da placa, acessado via ssh:
@@ -354,7 +354,7 @@ Com um dos dois últimos comandos, um temporizador estará disponível no termin
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg">
+    <img src="https://raw.githubusercontent.com/liviazampereti/Indentific.ai/master/images/camera_func.jpeg" width=50%>
 </p>
 
 <p align="center">
